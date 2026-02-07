@@ -33,6 +33,10 @@ common_cli_tools:
   - wget
   - curl
   - gh
+  - node
+  - pyright
+  - ruff
+  - lua-language-server
 
 config_directories:
   - "{{ dotfiles_home }}/.config"
