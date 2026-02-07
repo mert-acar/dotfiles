@@ -79,7 +79,7 @@ install_galaxy_requirements() {
 
 run_playbook() {
     print_info "Running Ansible playbook..."
-    ansible-playbook playbooks/main.yml "$@"
+    ansible-playbook playbooks/main.yml -K "$@"
     print_success "Playbook execution completed"
 }
 
