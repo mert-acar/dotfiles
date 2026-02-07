@@ -6,7 +6,6 @@ font-feature = -calt
 cursor-style = block
 cursor-style-blink = false
 shell-integration = true
-shell-integration-features = cursor,sudo,title
 mouse-hide-while-typing = true
 clipboard-read = allow
 clipboard-write = allow
