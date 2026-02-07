@@ -24,11 +24,6 @@
     update_homebrew: true
   when: homebrew_check.stat.exists
 
-- name: Install homebrew/bundle tap
-  community.general.homebrew_tap:
-    name: homebrew/bundle
-    state: present
-
 - name: Copy Brewfile to home directory
   ansible.builtin.copy:
     src: Brewfile.darwin

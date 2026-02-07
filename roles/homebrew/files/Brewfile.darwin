@@ -1,9 +1,4 @@
 # homebrew bundle file for macos
-
-tap "homebrew/bundle"
-tap "homebrew/cask-fonts"
-tap "nikitabobko/tap"
-
 brew "tmux"
 brew "neovim"
 brew "zsh"
@@ -28,6 +23,9 @@ cask "obsidian"
 cask "transmission"
 cask "raycast"
 cask "iina"
-cask "aerospace"
-
+cask "claude"
+cask "claude-code"
+cask "whatsapp"
+cask "telegram"
+cask "nikitabobko/tap/aerospace"
 cask "font-jetbrains-mono-nerd-font"
