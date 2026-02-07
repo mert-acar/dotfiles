@@ -8,9 +8,10 @@ export TERM="xterm-ghostty"
 ZSH_THEME="robbyrussell"
 plugins=(
     git
+    fzf
     zsh-autosuggestions
     zsh-syntax-highlighting
-    fzf
+    zsh-vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh

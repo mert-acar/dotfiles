@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+switch_to() {
+  if [[ -z "$TMUX" ]]; then
+    tmux attach-session -t $selected_name
+  else
+    tmux switch-client -t $selected_name
+  fi
+}
+
+has_session() {
+  tmux list-sessions | grep -q "^$1:"
+}
+
+hydrate() {
+  if [ -f $2/.hydrate ]; then
+    tmux send-keys -t $1 "source $2/.hydrate" c-M
+  else
+    tmux send-keys -t $1 "source $HOME/.local/bin/scripts/hydrate" c-M
+  fi
+}
+
+selected=$(find ~/personal ~/work ~/phd -mindepth 1 -maxdepth 1 -type d | fzf)
+if [[ -z "$selected" ]]; then
+  exit 0
+fi
+
+selected_name=$(basename $selected | tr . _)
+tmux_running=$(pgrep tmux)
+
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+  tmux new-session -s $selected_name -c $selected
+  hydrate $selected_name $selected
+  exit 0
+fi
+
+if ! has_session $selected_name; then
+  tmux new-session -ds $selected_name -c $selected
+  hydrate $selected_name $selected
+fi
+
+switch_to $selected_name

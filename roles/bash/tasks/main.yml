@@ -11,17 +11,8 @@
     state: directory
     mode: '0755'
 
-- name: Find custom bash scripts
-  ansible.builtin.find:
-    paths: "{{ role_path }}/files/scripts"
-    patterns: "*.sh"
-  register: bash_scripts
-  delegate_to: localhost
-
-- name: Copy custom bash scripts
+- name: Copy bash scripts
   ansible.builtin.copy:
-    src: "{{ item.path }}"
-    dest: "{{ dotfiles_home }}/.local/bin/{{ item.path | basename }}"
+    src: scripts/
+    dest: "{{ dotfiles_home }}/.local/bin/scripts/"
     mode: '0755'
-  loop: "{{ bash_scripts.files }}"
-  when: bash_scripts.files | length > 0
