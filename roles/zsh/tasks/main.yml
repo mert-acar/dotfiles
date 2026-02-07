@@ -1,0 +1,69 @@
+---
+- name: Ensure zsh is installed
+  ansible.builtin.command: which zsh
+  register: zsh_check
+  changed_when: false
+  failed_when: false
+
+- name: Get current shell
+  ansible.builtin.command: echo $SHELL
+  register: current_shell
+  changed_when: false
+
+- name: Get zsh path
+  ansible.builtin.command: which zsh
+  register: zsh_path
+  changed_when: false
+  when: zsh_check.rc == 0
+
+- name: Check if zsh is in /etc/shells
+  ansible.builtin.lineinfile:
+    path: /etc/shells
+    line: "{{ zsh_path.stdout }}"
+    state: present
+  become: true
+  when: zsh_check.rc == 0
+  check_mode: true
+  register: shells_check
+
+- name: Add zsh to /etc/shells if needed
+  ansible.builtin.lineinfile:
+    path: /etc/shells
+    line: "{{ zsh_path.stdout }}"
+    state: present
+  become: true
+  when:
+    - zsh_check.rc == 0
+    - shells_check is changed
+
+- name: Change default shell to zsh
+  ansible.builtin.user:
+    name: "{{ dotfiles_user }}"
+    shell: "{{ zsh_path.stdout }}"
+  become: true
+  when:
+    - zsh_check.rc == 0
+    - zsh_path.stdout not in current_shell.stdout
+
+- name: Check if oh-my-zsh is installed
+  ansible.builtin.stat:
+    path: "{{ dotfiles_home }}/.oh-my-zsh"
+  register: ohmyzsh_check
+
+- name: Install oh-my-zsh
+  ansible.builtin.shell: |
+    sh -c "$(curl -fsSL {{ oh_my_zsh_install_url }})" "" --unattended
+  when: not ohmyzsh_check.stat.exists
+  environment:
+    RUNZSH: "no"
+    CHSH: "no"
+
+- name: Copy .zshrc
+  ansible.builtin.copy:
+    src: .zshrc
+    dest: "{{ dotfiles_home }}/.zshrc"
+    mode: '0644'
+
+- name: Display zsh setup message
+  ansible.builtin.debug:
+    msg: "Zsh and oh-my-zsh configured. Restart your shell to apply changes."

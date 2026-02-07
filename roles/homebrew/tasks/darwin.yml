@@ -1,0 +1,43 @@
+---
+- name: Check if Homebrew is installed
+  ansible.builtin.stat:
+    path: "{{ homebrew_prefix }}/bin/brew"
+  register: homebrew_check
+
+- name: Install Homebrew (macOS)
+  ansible.builtin.shell: |
+    /bin/bash -c "$(curl -fsSL {{ homebrew_install_url }})"
+  when: not homebrew_check.stat.exists
+  become: false
+  environment:
+    NONINTERACTIVE: "1"
+
+- name: Ensure Homebrew is in PATH
+  ansible.builtin.lineinfile:
+    path: "{{ dotfiles_home }}/.zprofile"
+    line: 'eval "$({{ homebrew_prefix }}/bin/brew shellenv)"'
+    create: true
+    mode: '0644'
+
+- name: Update Homebrew
+  community.general.homebrew:
+    update_homebrew: true
+  when: homebrew_check.stat.exists
+
+- name: Install homebrew/bundle tap
+  community.general.homebrew_tap:
+    name: homebrew/bundle
+    state: present
+
+- name: Copy Brewfile to home directory
+  ansible.builtin.copy:
+    src: Brewfile.darwin
+    dest: "{{ dotfiles_home }}/Brewfile"
+    mode: '0644'
+
+- name: Install packages from Brewfile
+  ansible.builtin.command:
+    cmd: "{{ homebrew_prefix }}/bin/brew bundle --file={{ dotfiles_home }}/Brewfile"
+  register: brew_bundle_result
+  changed_when: "'Installing' in brew_bundle_result.stdout or 'Upgrading' in brew_bundle_result.stdout"
+  failed_when: brew_bundle_result.rc != 0

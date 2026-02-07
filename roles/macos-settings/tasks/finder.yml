@@ -1,0 +1,53 @@
+---
+- name: Show hidden files in Finder
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: AppleShowAllFiles
+    type: bool
+    value: "{{ finder_show_hidden_files }}"
+  notify: restart finder
+
+- name: Show all file extensions
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleShowAllExtensions
+    type: bool
+    value: "{{ finder_show_extensions }}"
+  notify: restart finder
+
+- name: Set default Finder view style
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: FXPreferredViewStyle
+    type: string
+    value: "{{ finder_default_view }}"
+  notify: restart finder
+
+- name: Show path bar in Finder
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: ShowPathbar
+    type: bool
+    value: true
+  notify: restart finder
+
+- name: Show status bar in Finder
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: ShowStatusBar
+    type: bool
+    value: true
+  notify: restart finder
+
+- name: Search current folder by default
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: FXDefaultSearchScope
+    type: string
+    value: "SCcf"
+  notify: restart finder
+
+- name: Show the ~/Library folder
+  ansible.builtin.command: chflags nohidden {{ dotfiles_home }}/Library
+  changed_when: false
+  failed_when: false

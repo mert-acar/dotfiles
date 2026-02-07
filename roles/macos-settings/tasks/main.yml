@@ -1,0 +1,18 @@
+---
+- name: Include hot corners configuration
+  ansible.builtin.include_tasks: hot-corners.yml
+  when:
+    - ansible_os_family == "Darwin"
+    - configure_hot_corners | bool
+
+- name: Include dock configuration
+  ansible.builtin.include_tasks: dock.yml
+  when:
+    - ansible_os_family == "Darwin"
+    - configure_dock | bool
+
+- name: Include finder configuration
+  ansible.builtin.include_tasks: finder.yml
+  when:
+    - ansible_os_family == "Darwin"
+    - configure_finder | bool

@@ -1,0 +1,26 @@
+---
+- name: Ensure neovim is installed
+  ansible.builtin.command: which nvim
+  register: nvim_check
+  changed_when: false
+  failed_when: false
+
+- name: Create neovim config directory structure
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - "{{ dotfiles_home }}/.config/nvim"
+    - "{{ dotfiles_home }}/.local/share/nvim"
+    - "{{ dotfiles_home }}/.local/state/nvim"
+
+- name: Copy neovim config files
+  ansible.builtin.copy:
+    src: nvim/
+    dest: "{{ dotfiles_home }}/.config/nvim/"
+    mode: '0644'
+
+- name: Display neovim setup message
+  ansible.builtin.debug:
+    msg: "Neovim configuration installed. Launch nvim to install plugins automatically."

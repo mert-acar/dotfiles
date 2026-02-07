@@ -1,0 +1,33 @@
+# homebrew bundle file for macos
+
+tap "homebrew/bundle"
+tap "homebrew/cask-fonts"
+tap "nikitabobko/tap"
+
+brew "tmux"
+brew "neovim"
+brew "zsh"
+brew "git"
+brew "eza"
+brew "zoxide"
+brew "fzf"
+brew "fd"
+brew "ripgrep"
+brew "bat"
+brew "lazygit"
+brew "jq"
+brew "htop"
+brew "tree"
+brew "gh"
+
+cask "spotify"
+cask "ghostty"
+cask "1password"
+cask "librewolf"
+cask "obsidian"
+cask "transmission"
+cask "raycast"
+cask "iina"
+cask "aerospace"
+
+cask "font-jetbrains-mono-nerd-font"
