@@ -1,8 +1,0 @@
----
-- name: reload tmux
-  ansible.builtin.shell: |
-    if tmux list-sessions &> /dev/null; then
-      tmux source-file {{ dotfiles_home }}/.config/tmux/tmux.conf
-    fi
-  failed_when: false
-  changed_when: false

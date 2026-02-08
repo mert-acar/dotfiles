@@ -1,4 +1,0 @@
----
-- name: Include OS-specific Homebrew tasks
-  ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}.yml"
-  when: configure_homebrew | bool
