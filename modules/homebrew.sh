@@ -34,6 +34,8 @@ run_homebrew() {
     log_info "Installing packages from Brewfile..."
     copy_file "$CONFIGS_DIR/Brewfile" "$HOME/Brewfile"
     run brew bundle --file="$HOME/Brewfile"
+    # remove quarantine attribute to avoid "App is damaged and can't be opened" error on macOS
+    xattr -d com.apple.quarantine /Applications/LibreWolf
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then

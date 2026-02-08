@@ -42,14 +42,14 @@ configure_dock() {
         fi
     done
 
-    # for entry in "${DOCK_FOLDERS[@]}"; do
-    #     IFS='|' read -r path display view <<< "$entry"
-    #     if [[ "$DRY_RUN" == true ]]; then
-    #         log_dry_run "dockutil --add $path --view $view --display $display"
-    #     else
-    #         dockutil --add "$path" --view "$view" --display "$display" --no-restart 2>/dev/null || true
-    #     fi
-    # done
+    for entry in "${DOCK_FOLDERS[@]}"; do
+        IFS='|' read -r path display view <<< "$entry"
+        if [[ "$DRY_RUN" == true ]]; then
+            log_dry_run "dockutil --add $path --view $view --display $display"
+        else
+            dockutil --add "$path" --view "$view" --display "$display" --no-restart 2>/dev/null || true
+        fi
+    done
 }
 
 configure_finder() {
@@ -65,12 +65,33 @@ configure_finder() {
     run chflags nohidden "$HOME/Library"
 }
 
+configure_accessibility() {
+    log_info "Configuring accessibility..."
+    # Enable dragging windows from anywhere with Ctrl+Cmd click
+    defaults_write NSGlobalDomain NSWindowShouldDragOnGesture bool true
+    # Disable "click wallpaper to reveal desktop"
+    defaults_write com.apple.WindowManager EnableStandardClickToShowDesktop bool false
+    # Disable Spotlight shortcut (Cmd+Space) so Raycast can use it
+    # log_info "Disabling Spotlight shortcut (Cmd+Space)..."
+    # run defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 \
+    #     '{ enabled = 0; value = { parameters = (32, 49, 1048576); type = standard; }; }'
+}
+
 run_macos_settings() {
     log_section "macOS Settings"
 
     configure_hot_corners
     configure_dock
     configure_finder
+    configure_accessibility
+
+    # Set LibreWolf as the default browser
+    if command_exists defaultbrowser; then
+        log_info "Setting LibreWolf as default browser..."
+        run defaultbrowser librewolf
+    else
+        log_warn "defaultbrowser not installed — skipping default browser setup"
+    fi
 
     log_info "Restarting Dock..."
     run killall Dock || true

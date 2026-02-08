@@ -15,6 +15,7 @@ brew "htop"
 brew "tree"
 brew "gh"
 brew "dockutil"
+brew "defaultbrowser"
 
 cask "spotify"
 cask "ghostty"

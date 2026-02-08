@@ -5,7 +5,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/lib/utils.sh"
 
-ALL_MODULES=(homebrew zsh bash-scripts tmux neovim ghostty aerospace macos-settings)
+ALL_MODULES=(homebrew zsh bash-scripts tmux neovim ghostty aerospace raycast macos-settings)
 
 module_function() {
     case "$1" in
@@ -16,6 +16,7 @@ module_function() {
         neovim)         echo run_neovim ;;
         ghostty)        echo run_ghostty ;;
         aerospace)      echo run_aerospace ;;
+        raycast)        echo run_raycast ;;
         macos-settings) echo run_macos_settings ;;
         *)              return 1 ;;
     esac
@@ -42,6 +43,7 @@ Modules (run in order, all by default):
   neovim          Install neovim configuration
   ghostty         Install Ghostty terminal config
   aerospace       Install AeroSpace window manager config
+  raycast         Import Raycast configuration
   macos-settings  Configure macOS system preferences
 
 Examples:

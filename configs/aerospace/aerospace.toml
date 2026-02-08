@@ -127,11 +127,11 @@ automatically-unhide-macos-hidden-apps = false
     alt-7 = 'workspace 7'
     alt-8 = 'workspace 8'
     alt-9 = 'workspace 9'
-    alt-a = 'workspace term'
-    alt-m = 'workspace music'
-    alt-o = 'workspace obsidian'
-    alt-w = 'workspace browser'
-    alt-c = 'workspace ai'
+    alt-a = 'exec-and-forget open -a Ghostty'
+    alt-m = 'exec-and-forget open -a Spotify'
+    alt-o = 'exec-and-forget open -a Obsidian'
+    alt-w = 'exec-and-forget open -b org.mozilla.librewolf'
+    alt-c = 'exec-and-forget open -a Claude'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1'] 
