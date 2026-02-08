@@ -34,8 +34,12 @@ run_homebrew() {
     log_info "Installing packages from Brewfile..."
     copy_file "$CONFIGS_DIR/Brewfile" "$HOME/Brewfile"
     run brew bundle --file="$HOME/Brewfile"
-    # remove quarantine attribute to avoid "App is damaged and can't be opened" error on macOS
-    xattr -d com.apple.quarantine /Applications/LibreWolf
+    # Remove quarantine attribute to avoid "App is damaged and can't be opened" error on macOS
+    if xattr -r -l /Applications/LibreWolf.app 2>/dev/null | grep -q com.apple.quarantine; then
+        run xattr -r -d com.apple.quarantine /Applications/LibreWolf.app
+    else
+        log_skip "LibreWolf quarantine attribute already removed"
+    fi
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
