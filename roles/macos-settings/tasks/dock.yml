@@ -46,3 +46,36 @@
     type: bool
     value: true
   notify: restart dock
+
+- name: Remove all dock items except Finder
+  ansible.builtin.shell: |
+    dockutil --list | grep -v '^Finder' | awk -F'\t' '{print $1}' | while read app; do
+      dockutil --remove "$app" --no-restart 2>/dev/null || true
+    done
+  changed_when: false
+
+- name: Add applications to dock
+  ansible.builtin.command:
+    cmd: dockutil --add "{{ item.path }}" --no-restart
+  loop: "{{ dock_applications }}"
+  register: dock_add_result
+  changed_when: "'already exists' not in dock_add_result.stderr"
+  failed_when: dock_add_result.rc != 0 and 'already exists' not in dock_add_result.stderr
+  notify: restart dock
+
+- name: Add Downloads folder to dock
+  ansible.builtin.command:
+    cmd: dockutil --add "{{ item.path }}" --view {{ item.view }} --display {{ item.display }} --no-restart
+  loop: "{{ dock_folders }}"
+  register: dock_folder_result
+  changed_when: "'already exists' not in dock_folder_result.stderr"
+  failed_when: dock_folder_result.rc != 0 and 'already exists' not in dock_folder_result.stderr
+  notify: restart dock
+
+- name: Ensure Trash is in dock
+  ansible.builtin.shell: |
+    if ! dockutil --list | grep -q 'Trash'; then
+      # Trash is automatically added by macOS, but we ensure it's there
+      killall Dock
+    fi
+  changed_when: false

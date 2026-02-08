@@ -13,6 +13,10 @@ macos_applications:
   - raycast
   - iina
 
+# CLI tools for macOS management
+macos_cli_tools:
+  - dockutil
+
 configure_aerospace: true
 configure_macos_settings: true
 configure_hot_corners: true
@@ -41,6 +45,23 @@ dock_icon_size: 48
 dock_autohide: true
 dock_orientation: "bottom"
 dock_show_recents: false
+
+# Dock applications (in order)
+dock_applications:
+  - name: "LibreWolf"
+    path: "/Applications/LibreWolf.app"
+  - name: "Mail"
+    path: "/System/Applications/Mail.app"
+  - name: "Calendar"
+    path: "/System/Applications/Calendar.app"
+  - name: "iPhone Mirroring"
+    path: "/System/Applications/iPhone Mirroring.app"
+
+# Dock folders/stacks
+dock_folders:
+  - path: "{{ ansible_env.HOME }}/Downloads"
+    display: "folder"
+    view: "fan"
 finder_show_hidden_files: true
 finder_show_extensions: true
 finder_default_view: "Nlsv"  # list view
