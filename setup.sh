@@ -87,6 +87,14 @@ log_info "=========================================="
 echo ""
 log_info "Modules: ${SELECTED_MODULES[*]}"
 
+# Ask for sudo upfront (needed by Homebrew install, chsh, etc.)
+if [[ "$DRY_RUN" != true ]]; then
+    log_info "Some steps require sudo. Requesting credentials..."
+    sudo -v
+    # Keep sudo alive for the duration of the script
+    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+fi
+
 log_section "Common Directories"
 for dir in "$HOME/.config" "$HOME/.local/bin" "$HOME/.local/share" "$HOME/.local/state"; do
     ensure_dir "$dir"
