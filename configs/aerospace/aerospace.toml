@@ -44,10 +44,10 @@ automatically-unhide-macos-hidden-apps = true
     alt-7 = 'workspace 7'
     alt-8 = 'workspace 8'
     alt-9 = 'workspace 9'
+    alt-w = 'exec-and-forget open -a Helium'
     alt-a = 'exec-and-forget open -a Ghostty'
     alt-m = 'exec-and-forget open -a Spotify'
     alt-o = 'exec-and-forget open -a Obsidian'
-    alt-w = 'exec-and-forget open -b Safari'
     alt-c = 'exec-and-forget open -a Claude'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
@@ -86,6 +86,10 @@ automatically-unhide-macos-hidden-apps = true
     down = 'volume down'
     up = 'volume up'
     shift-down = ['volume set 0', 'mode main']
+
+[[on-window-detected]]
+if.app-id = 'net.imput.helium'
+run = 'move-node-to-workspace browser'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Safari'
