@@ -24,7 +24,6 @@ DOCK_AUTOHIDE=true
 DOCK_ORIENTATION="bottom"
 DOCK_SHOW_RECENTS=false
 DOCK_APPLICATIONS=(
-    "LibreWolf|/Applications/LibreWolf.app"
     "Mail|/System/Applications/Mail.app"
     "Calendar|/System/Applications/Calendar.app"
     "iPhone Mirroring|/System/Applications/iPhone Mirroring.app"

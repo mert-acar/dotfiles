@@ -85,13 +85,6 @@ run_macos_settings() {
     configure_finder
     configure_accessibility
 
-    # Set LibreWolf as the default browser
-    if command_exists defaultbrowser; then
-        log_info "Setting LibreWolf as default browser..."
-        run defaultbrowser librewolf
-    else
-        log_warn "defaultbrowser not installed — skipping default browser setup"
-    fi
 
     log_info "Restarting Dock..."
     run killall Dock || true
