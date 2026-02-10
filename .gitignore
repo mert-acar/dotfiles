@@ -1,28 +1,8 @@
-# Ansible
-*.retry
-.vault_password
-
 # macOS
 .DS_Store
 .AppleDouble
 .LSOverride
 
-# Vim/Neovim
-*.swp
-*.swo
-*~
-
-# IDE
-.vscode/
-.idea/
-
 # Local customizations
 local.yml
 host_vars/
-
-# Logs
-*.log
-
-# Temporary files
-tmp/
-temp/
