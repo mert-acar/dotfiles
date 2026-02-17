@@ -45,6 +45,7 @@ automatically-unhide-macos-hidden-apps = true
     alt-8 = 'workspace 8'
     alt-9 = 'workspace 9'
     alt-w = 'workspace browser'
+    alt-s = 'workspace slack'
     alt-a = 'workspace term'
     alt-m = 'workspace music'
     alt-o = 'workspace obsidian'
@@ -65,6 +66,7 @@ automatically-unhide-macos-hidden-apps = true
     alt-shift-m = ['move-node-to-workspace music', 'workspace music']
     alt-shift-o = ['move-node-to-workspace obsidian', 'workspace obsidian']
     alt-shift-w = ['move-node-to-workspace browser', 'workspace browser']
+    alt-shift-s = ['move-node-to-workspace slack', 'workspace slack']
     alt-shift-c = ['move-node-to-workspace ai', 'workspace ai']
     alt-shift-n = ['move-node-to-workspace linear', 'workspace linear']
 
@@ -88,6 +90,10 @@ automatically-unhide-macos-hidden-apps = true
     down = 'volume down'
     up = 'volume up'
     shift-down = ['volume set 0', 'mode main']
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = 'move-node-to-workspace slack'
 
 [[on-window-detected]]
 if.app-id = 'com.linear'
