@@ -88,6 +88,10 @@ automatically-unhide-macos-hidden-apps = true
     shift-down = ['volume set 0', 'mode main']
 
 [[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+run = 'move-node-to-workspace browser'
+
+[[on-window-detected]]
 if.app-id = 'net.imput.helium'
 run = 'move-node-to-workspace browser'
 
