@@ -19,6 +19,7 @@ brew "defaultbrowser"
 brew "node"
 brew "pyright"
 brew "lua-language-server"
+brew "ruff"
 
 cask "spotify"
 cask "ghostty"
