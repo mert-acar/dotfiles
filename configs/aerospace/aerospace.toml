@@ -49,6 +49,7 @@ automatically-unhide-macos-hidden-apps = true
     alt-m = 'workspace music'
     alt-o = 'workspace obsidian'
     alt-c = 'workspace ai'
+    alt-n = 'workspace linear'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1'] 
@@ -65,6 +66,7 @@ automatically-unhide-macos-hidden-apps = true
     alt-shift-o = ['move-node-to-workspace obsidian', 'workspace obsidian']
     alt-shift-w = ['move-node-to-workspace browser', 'workspace browser']
     alt-shift-c = ['move-node-to-workspace ai', 'workspace ai']
+    alt-shift-n = ['move-node-to-workspace linear', 'workspace linear']
 
     alt-shift-f = 'fullscreen'
 
@@ -86,6 +88,10 @@ automatically-unhide-macos-hidden-apps = true
     down = 'volume down'
     up = 'volume up'
     shift-down = ['volume set 0', 'mode main']
+
+[[on-window-detected]]
+if.app-id = 'com.linear'
+run = 'move-node-to-workspace linear'
 
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome'
