@@ -21,6 +21,7 @@ brew "pyright"
 brew "lua-language-server"
 brew "ruff"
 brew "gnupg"
+brew "uv"
 
 cask "spotify"
 cask "ghostty"
