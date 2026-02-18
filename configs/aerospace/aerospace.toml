@@ -119,6 +119,11 @@ run = 'move-node-to-workspace obsidian'
 if.app-id = 'com.mitchellh.ghostty'
 run = 'move-node-to-workspace term'
 
+
+[[on-window-detected]]
+if.app-id = 'com.openai.chat'
+run = 'move-node-to-workspace ai'
+
 [[on-window-detected]]
 if.app-id = 'com.anthropic.claudefordesktop'
 run = 'move-node-to-workspace ai'
