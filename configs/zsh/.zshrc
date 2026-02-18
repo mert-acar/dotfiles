@@ -2,6 +2,7 @@
 
 export ZSH="$HOME/.oh-my-zsh"
 export PATH="$PATH:$HOME/.local/bin/"
+export PATH="$PATH:$HOME/.local/bin/scripts/"
 export PATH="$PATH:$HOME/go/bin/"
 export TERM="xterm-ghostty"
 
@@ -49,6 +50,7 @@ alias grep='grep --color=auto'
 alias mkdir='mkdir -pv'
 alias a='source .venv/bin/activate'
 alias dc='deactivate'
+alias c='agent'
 
 if command -v fzf &> /dev/null; then
     export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'

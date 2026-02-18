@@ -22,6 +22,7 @@ brew "lua-language-server"
 brew "ruff"
 brew "gnupg"
 brew "uv"
+brew "go"
 
 cask "spotify"
 cask "ghostty"

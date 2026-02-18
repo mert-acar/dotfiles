@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
 tmux neww -dn run
+tmux send-keys -t run "source .venv/bin/activate" c-M
+tmux send-keys -t run "clear" c-M
+tmux neww -dn ai
+tmux send-keys -t ai "source .venv/bin/activate" c-M
+tmux send-keys -t ai "clear" c-M
+tmux send-keys -t ai "agent" c-M
 nvim .
 clear
