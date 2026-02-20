@@ -46,6 +46,7 @@ run_zsh() {
     done
 
     copy_file "$CONFIGS_DIR/zsh/.zshrc" "$HOME/.zshrc"
+    copy_file "$CONFIGS_DIR/zsh/.zprofile" "$HOME/.zprofile"
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
