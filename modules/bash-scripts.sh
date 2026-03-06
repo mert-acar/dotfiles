@@ -15,6 +15,7 @@ run_bash_scripts() {
 
     copy_file "$CONFIGS_DIR/bash/scripts/tmux-sessionizer" "$HOME/.local/bin/scripts/tmux-sessionizer" "0755"
     copy_file "$CONFIGS_DIR/bash/scripts/hydrate" "$HOME/.local/bin/scripts/hydrate" "0755"
+    copy_file "$CONFIGS_DIR/bash/scripts/aws-sso" "$HOME/.local/bin/scripts/aws-sso" "0755"
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then

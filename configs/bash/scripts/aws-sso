@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PROFILE="isrdev"
+SSO_SESSION="isrdev"
+REGION="eu-central-1"
+
+if aws sts get-caller-identity --profile "$PROFILE" &>/dev/null; then
+    printf "SSO session is still active.\n"
+else
+    printf "SSO session expired. Opening browser for OKTA login...\n"
+    aws sso login --sso-session "$SSO_SESSION"
+fi
+
+printf "Writing credentials to [default] profile...\n"
+
+eval "$(aws configure export-credentials --profile "$PROFILE" --format env)"
+
+aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
+aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
+aws configure set aws_session_token "$AWS_SESSION_TOKEN"
+aws configure set region "$REGION"
+
+printf "\n"
+aws sts get-caller-identity --no-cli-pager
+printf "\nDefault credentials set. Valid for ~12 hours.\n"
