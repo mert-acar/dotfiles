@@ -31,6 +31,7 @@ Modules can also run standalone: `./modules/ghostty.sh --dry-run`
 | `bash-scripts` | Custom scripts (`tmux-sessionizer`, `hydrate`) to `~/.local/bin` |
 | `tmux` | tmux config + TPM plugin manager |
 | `neovim` | Full nvim config (lazy.nvim, LSP, treesitter, etc.) |
+| `lazygit` | config for the greatest git manager in the world: LazyGit |
 | `ghostty` | Ghostty terminal config |
 | `aerospace` | AeroSpace tiling window manager config |
 | `macos-settings` | Dock, Finder, and hot corner preferences via `defaults write` |
