@@ -36,3 +36,9 @@ map("n", "<leader>rr", "oraise SystemExit<Esc>", { desc = "Insert SystemExit" })
 map("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>", { desc = "Insert err != nil" })
 
 map("x", "p", '"_dP', { noremap = true, desc = "Paste over selection without updating register" })
+
+map("n", "<leader>cp", function()
+	local path = vim.fn.expand("%:.")
+	vim.fn.setreg("+", path)
+	vim.notify("Copied: " .. path)
+end, { desc = "Copy relative file path to clipboard" })
