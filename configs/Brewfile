@@ -1,6 +1,7 @@
 # homebrew bundle file for macos
 brew "tmux"
 brew "neovim"
+brew "tree-sitter-cli"
 brew "zsh"
 brew "git"
 brew "eza"
