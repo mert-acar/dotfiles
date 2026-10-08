@@ -17,6 +17,30 @@ return {
 				ignorecase = false,
 			},
 		},
+		image = {
+			enabled = true,
+			doc = {
+				-- default is 80 columns x 40 rows, which crops long equations
+				max_width = 200,
+				max_height = 40,
+			},
+			math = {
+				enabled = true,
+				latex = {
+					font_size = "Large",
+					-- the default `varwidth` caps the page at \linewidth (~1036px), cropping long equations
+					tpl = [[
+        \documentclass[preview,border=0pt,varwidth=100cm,12pt]{standalone}
+        \usepackage{${packages}}
+        \begin{document}
+        ${header}
+        { \${font_size} \selectfont
+          \color[HTML]{${color}}
+        ${content}}
+        \end{document}]],
+				},
+			},
+		},
 		toggle = { enabled = true },
 		notifier = { enabled = true },
 		-- scope = { enabled = true },
