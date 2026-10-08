@@ -18,4 +18,3 @@ graphic design is my passion
 - treesitter: syntax highlighting and cool motions (af: around a function)
 - LSP: lol
 - blink: not sure what this does
-- aerial: symbols in a file
