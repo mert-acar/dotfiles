@@ -28,6 +28,7 @@ return {
 			"vim",
 			"vimdoc",
 			"yaml",
+			"python",
 			"rust",
 			"go",
 			"gomod",
